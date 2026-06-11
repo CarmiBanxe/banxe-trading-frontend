@@ -5,6 +5,6 @@ import { App } from "../../src/app/App";
 describe("App", () => {
   it("renders without crashing", () => {
     render(<App />);
-    expect(screen.getByText("Order Book")).toBeInTheDocument();
+    expect(screen.getByText("Trading")).toBeInTheDocument();
   });
 });
