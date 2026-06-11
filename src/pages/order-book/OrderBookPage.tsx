@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useOrderBookStore } from "@/entities/order-book";
 import type { RawOrderBookSnapshot } from "@/entities/order-book";
 import { OrderBookWidget } from "@/widgets/order-book";
+import { OrderEntryWidget } from "@/widgets/order-entry";
 
 const MOCK_SNAPSHOT: RawOrderBookSnapshot = {
   bids: [
@@ -34,8 +35,11 @@ export function OrderBookPage(): JSX.Element {
 
   return (
     <div>
-      <h1>Order Book</h1>
-      <OrderBookWidget />
+      <h1>Trading</h1>
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <OrderBookWidget />
+        <OrderEntryWidget />
+      </div>
     </div>
   );
 }
