@@ -1,5 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
+
+# Python (from template)
 .venv/
 __pycache__/
-node_modules/
-.DS_Store
-*.log
