@@ -13,3 +13,6 @@ export {
   parseDiff,
   applyDiff,
 } from "./pure";
+
+export { useOrderBookStore } from "./store";
+export type { OrderBookState } from "./store";
