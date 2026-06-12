@@ -1,5 +1,23 @@
 import { useOrderBookStore } from "@/entities/order-book";
 import type { PriceLevel } from "@/entities/order-book";
+import { useFeedStatusStore } from "@/features/order-book-feed";
+import type { FeedStatus } from "@/features/order-book-feed";
+
+const CONN_LABEL: Record<FeedStatus, string> = {
+  connecting: "Connecting…",
+  open: "Live",
+  reconnecting: "Reconnecting…",
+  closed: "Disconnected",
+};
+
+function ConnectionIndicator(): JSX.Element {
+  const status = useFeedStatusStore((s) => s.status);
+  return (
+    <div data-testid="ob-conn-status" data-status={status}>
+      <span aria-hidden>●</span> {CONN_LABEL[status]}
+    </div>
+  );
+}
 
 function PriceLevelRow({ level, side }: { level: PriceLevel; side: "bid" | "ask" }): JSX.Element {
   return (
@@ -10,7 +28,7 @@ function PriceLevelRow({ level, side }: { level: PriceLevel; side: "bid" | "ask"
   );
 }
 
-export function OrderBookWidget(): JSX.Element {
+function OrderBookBody(): JSX.Element {
   const snapshot = useOrderBookStore((s) => s.snapshot);
   const status = useOrderBookStore((s) => s.status);
   const error = useOrderBookStore((s) => s.error);
@@ -51,6 +69,15 @@ export function OrderBookWidget(): JSX.Element {
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+export function OrderBookWidget(): JSX.Element {
+  return (
+    <div data-testid="ob-widget">
+      <ConnectionIndicator />
+      <OrderBookBody />
     </div>
   );
 }
