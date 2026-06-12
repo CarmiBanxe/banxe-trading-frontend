@@ -6,6 +6,7 @@ import {
 } from "@/features/order-book-feed";
 import { OrderBookWidget } from "@/widgets/order-book";
 import { OrderEntryWidget } from "@/widgets/order-entry";
+import { DepthChartWidget } from "@/widgets/depth-chart";
 
 /**
  * Resolve the feed transport: a real WebSocket when a VITE WS URL is provided,
@@ -36,6 +37,7 @@ export function OrderBookPage(): JSX.Element {
       <h1>Trading</h1>
       <div style={{ display: "flex", gap: "1rem" }}>
         <OrderBookWidget />
+        <DepthChartWidget />
         <OrderEntryWidget />
       </div>
     </div>

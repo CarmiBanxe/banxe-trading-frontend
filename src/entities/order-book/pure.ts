@@ -8,6 +8,8 @@ import type {
   PriceLevel,
   OrderBookSnapshot,
   OrderBookDiff,
+  DepthPoint,
+  DepthSeries,
   RawPriceLevel,
   RawOrderBookSnapshot,
   RawOrderBookDiff,
@@ -71,4 +73,32 @@ function mergeSide(
     return 0;
   });
   return result;
+}
+
+/**
+ * Compute cumulative-depth series from a snapshot.
+ *
+ * Sides keep the snapshot's ordering (bids descending, asks ascending), so
+ * cumulative quantity grows outward from the best price on each side. All
+ * accumulation is Decimal (I-01); conversion to number happens only at the
+ * output boundary for the chart layer.
+ */
+export function cumulativeDepth(snapshot: OrderBookSnapshot): DepthSeries {
+  return {
+    bids: accumulate(snapshot.bids),
+    asks: accumulate(snapshot.asks),
+  };
+}
+
+function accumulate(levels: readonly PriceLevel[]): DepthPoint[] {
+  let running = Decimal.ZERO;
+  const points: DepthPoint[] = [];
+  for (const level of levels) {
+    running = running.add(level.quantity);
+    points.push({
+      price: Number(level.price.toString()),
+      cumulative: Number(running.toString()),
+    });
+  }
+  return points;
 }

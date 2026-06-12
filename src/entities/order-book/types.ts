@@ -13,6 +13,21 @@ export interface OrderBookSnapshot {
   readonly sequence: number;
 }
 
+/**
+ * One point of a cumulative-depth curve. Plain numbers: this is the chart
+ * boundary, so Decimal (I-01) is converted to number only here.
+ */
+export interface DepthPoint {
+  readonly price: number;
+  readonly cumulative: number;
+}
+
+/** Cumulative depth for both sides of the book. */
+export interface DepthSeries {
+  readonly bids: readonly DepthPoint[];
+  readonly asks: readonly DepthPoint[];
+}
+
 /** Incremental diff received from the stream. */
 export interface OrderBookDiff {
   readonly bids: readonly PriceLevel[];
