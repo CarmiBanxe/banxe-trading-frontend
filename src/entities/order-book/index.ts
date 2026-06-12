@@ -2,6 +2,8 @@ export type {
   PriceLevel,
   OrderBookSnapshot,
   OrderBookDiff,
+  DepthPoint,
+  DepthSeries,
   RawPriceLevel,
   RawOrderBookSnapshot,
   RawOrderBookDiff,
@@ -12,6 +14,7 @@ export {
   parseSnapshot,
   parseDiff,
   applyDiff,
+  cumulativeDepth,
 } from "./pure";
 
 export { useOrderBookStore } from "./store";
