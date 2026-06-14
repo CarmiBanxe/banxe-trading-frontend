@@ -6,6 +6,9 @@ export type {
   SentimentScore,
   StressScenario,
   StressTests,
+  Greeks,
+  RiskMetrics,
+  EarnMetrics,
   Recommendation,
   ModelVersions,
   RecommendRequest,
@@ -24,3 +27,5 @@ export { DecisionSupportController } from "./controller";
 export type { DecisionSupportOptions, DecisionSupportSink } from "./controller";
 
 export { buildDecisionSupportController } from "./build";
+
+export { prefillFromRecommendation, isTradable } from "./prefill";

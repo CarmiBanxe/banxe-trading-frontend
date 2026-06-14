@@ -14,7 +14,7 @@ describe("createMockDseClient (default, no network)", () => {
       portfolioValueUsd: "10000",
     });
     expect(resp.disclaimer).toMatch(/Advisory only/);
-    expect(resp.recommendations.map((r) => r.rank)).toEqual([1, 2, 3]);
+    expect(resp.recommendations.map((r) => r.rank)).toEqual([1, 2, 3, 4]);
     expect(resp.recommendations[0].action.asset).toBe("BTCUSDT");
     // Decimal strings (I-01) — never coerced to number.
     expect(typeof resp.recommendations[0].halfKellySizePct).toBe("string");
@@ -31,7 +31,7 @@ describe("DecisionSupportController (mock client → store)", () => {
     await ctrl.recommend({ asset: "BTCUSDT", portfolioValueUsd: "10000" });
     const state = useDecisionSupportStore.getState();
     expect(state.status).toBe("ready");
-    expect(state.response?.recommendations.length).toBe(3);
+    expect(state.response?.recommendations.length).toBe(4);
   });
 
   it("surfaces a client error and stores no response", async () => {

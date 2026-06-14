@@ -52,6 +52,32 @@ export interface StressTests {
   readonly explanation: string;
 }
 
+export interface Greeks {
+  readonly delta: string;
+  readonly gamma: string;
+  readonly vega: string;
+  readonly theta: string;
+  readonly rho: string;
+}
+
+export interface RiskMetrics {
+  readonly greeks: Greeks;
+  readonly var99Pct: string;
+  readonly ddPct: string;
+  readonly unrealizedPnlPct: string;
+  readonly unrealizedPnlUsd: string;
+  readonly liquidityScore: string;
+}
+
+export interface EarnMetrics {
+  readonly currentYieldPct: string;
+  readonly protocol: string;
+  readonly chain: string;
+  readonly lockupDays: number;
+  readonly variableRate: boolean;
+  readonly riskSummary: string;
+}
+
 export interface Recommendation {
   readonly rank: number;
   readonly action: Action;
@@ -63,6 +89,8 @@ export interface Recommendation {
   readonly liquidityScore: string;
   readonly kellySizePct: string;
   readonly halfKellySizePct: string;
+  readonly riskMetrics: RiskMetrics;
+  readonly earnMetrics?: EarnMetrics | null;
   readonly sentiment?: SentimentScore | null;
   readonly stressTests?: StressTests | null;
   readonly reasons: string;
