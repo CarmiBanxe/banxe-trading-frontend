@@ -13,6 +13,10 @@ interface ImportMetaEnv {
   readonly VITE_DSE_PROVIDER?: string;
   /** Backend DSE API base. Defaults to "/api/v1". */
   readonly VITE_DSE_API_URL?: string;
+  /** Execution intent-preview provider: "mock" (default, no network) or "http". */
+  readonly VITE_EXECUTION_PROVIDER?: string;
+  /** Backend internal execution API base. Defaults to "/api/v1". */
+  readonly VITE_EXECUTION_API_URL?: string;
 }
 
 interface ImportMeta {
