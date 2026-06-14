@@ -2,3 +2,4 @@
 export { OrderBookWidget } from "./order-book";
 export { OrderEntryWidget } from "./order-entry";
 export { DepthChartWidget } from "./depth-chart";
+export { DecisionSupportWidget } from "./decision-support";
