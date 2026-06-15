@@ -17,6 +17,12 @@ interface ImportMetaEnv {
   readonly VITE_EXECUTION_PROVIDER?: string;
   /** Backend internal execution API base. Defaults to "/api/v1". */
   readonly VITE_EXECUTION_API_URL?: string;
+  /** Sandbox portal provider: "mock" (default, no network) or "http". */
+  readonly VITE_SANDBOX_PROVIDER?: string;
+  /** Backend internal sandbox API base. Defaults to "/api/v1". */
+  readonly VITE_SANDBOX_API_URL?: string;
+  /** Internal-only: when "1", App renders the Sandbox Portal (dev/sandbox shell). */
+  readonly VITE_SANDBOX_PORTAL?: string;
 }
 
 interface ImportMeta {
