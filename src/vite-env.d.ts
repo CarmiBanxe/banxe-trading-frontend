@@ -3,6 +3,10 @@
 interface ImportMetaEnv {
   /** Order-book WebSocket URL. When unset, the page uses a deterministic mock feed. */
   readonly VITE_ORDERBOOK_WS_URL?: string;
+  /** BFF REST base (S6.8 wiring). Used by shared/api/trade-proxy when no per-feature override. */
+  readonly VITE_TRADE_PROXY_URL?: string;
+  /** BFF WS base (S6.8 wiring). When set, derives /ws/orderbook/{symbol}; mock stays default. */
+  readonly VITE_TRADE_PROXY_WS?: string;
   /** Backend auth API base (WalletAuthPort). Defaults to "/api/v1". */
   readonly VITE_AUTH_API_URL?: string;
   /** Wallet provider: "mock" (default), "injected" (MetaMask), or "walletconnect". */

@@ -4,6 +4,7 @@ import {
   createMockSocketFactory,
   useFeedStatusStore,
 } from "@/features/order-book-feed";
+import { resolveOrderBookWsUrl } from "@/shared/api/trade-proxy";
 import { buildDecisionSupportController } from "@/features/decision-support";
 import { OrderBookWidget } from "@/widgets/order-book";
 import { OrderEntryWidget } from "@/widgets/order-entry";
@@ -11,11 +12,13 @@ import { DepthChartWidget } from "@/widgets/depth-chart";
 import { DecisionSupportWidget } from "@/widgets/decision-support";
 
 /**
- * Resolve the feed transport: a real WebSocket when a VITE WS URL is provided,
- * otherwise a deterministic mock so dev/CI render without a live socket.
+ * Resolve the feed transport. S6.8 wire-not-build: when an explicit per-symbol
+ * WS URL is set (VITE_ORDERBOOK_WS_URL) OR the trade-proxy BFF WS base is set
+ * (VITE_TRADE_PROXY_WS), bind to the live BFF; otherwise use the deterministic
+ * mock socket so dev/CI render with NO network (IL-185 stays the default).
  */
 function buildController(): OrderBookFeedController {
-  const url = import.meta.env.VITE_ORDERBOOK_WS_URL;
+  const url = resolveOrderBookWsUrl("BTC-EUR");
   const onStatus = useFeedStatusStore.getState().setStatus;
   if (url) {
     return new OrderBookFeedController({ url, onStatus });
